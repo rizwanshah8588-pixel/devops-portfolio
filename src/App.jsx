@@ -69,10 +69,10 @@ export default function App() {
 
     emailjs
       .sendForm(
-        "YOUR_SERVICE_ID",
-        "YOUR_TEMPLATE_ID",
+        "service_hnrempl",
+        "template_kz8miqs",
         e.target,
-        "YOUR_PUBLIC_KEY"
+        "ak-B4oC3V31cbZAr1"
       )
       .then(() => alert("Message sent!"));
   };
