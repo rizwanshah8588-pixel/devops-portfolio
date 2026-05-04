@@ -1,198 +1,164 @@
-import { useEffect, useRef, useState } from "react";
-import emailjs from "emailjs-com";
+import { motion } from "framer-motion";
+import "./App.css";
 
-export default function App() {
-  const canvasRef = useRef(null);
-  const [repos, setRepos] = useState([]);
-  const [text, setText] = useState("");
-
-  const fullText =
-    "DevOps Engineer | AWS | Docker | Kubernetes | Terraform | CI/CD";
-
-  // 🔤 Typing effect
-  useEffect(() => {
-    let i = 0;
-    const interval = setInterval(() => {
-      setText(fullText.slice(0, i));
-      i++;
-      if (i > fullText.length) clearInterval(interval);
-    }, 60);
-    return () => clearInterval(interval);
-  }, []);
-
-  // 🟢 Matrix Rain Effect
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
-
-    canvas.height = window.innerHeight;
-    canvas.width = window.innerWidth;
-
-    const letters = "01DEVOPS";
-    const fontSize = 14;
-    const columns = canvas.width / fontSize;
-
-    const drops = Array(Math.floor(columns)).fill(1);
-
-    function draw() {
-      ctx.fillStyle = "rgba(0,0,0,0.05)";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      ctx.fillStyle = "#00ffcc";
-      ctx.font = fontSize + "px monospace";
-
-      drops.forEach((y, i) => {
-        const text = letters[Math.floor(Math.random() * letters.length)];
-        ctx.fillText(text, i * fontSize, y * fontSize);
-
-        if (y * fontSize > canvas.height && Math.random() > 0.975) {
-          drops[i] = 0;
-        }
-        drops[i]++;
-      });
-    }
-
-    const interval = setInterval(draw, 33);
-    return () => clearInterval(interval);
-  }, []);
-
-  // 🟡 Fetch GitHub repos
-  useEffect(() => {
-    fetch("https://api.github.com/users/YOUR_USERNAME/repos")
-      .then((res) => res.json())
-      .then((data) => setRepos(data.slice(0, 4)));
-  }, []);
-
-  // 🟣 Contact form
-  const sendEmail = (e) => {
-    e.preventDefault();
-
-    emailjs
-      .sendForm(
-        "service_hnrempl",
-        "template_kz8miqs",
-        e.target,
-        "ak-B4oC3V31cbZAr1"
-      )
-      .then(() => alert("Message sent!"));
-  };
-
+function App() {
   return (
-    <div style={styles.container}>
-      <canvas ref={canvasRef} style={styles.canvas}></canvas>
-
-      <h1 style={styles.name}>Rizwan Shah</h1>
-      <h2 style={styles.typing}>{text}|</h2>
-
-      {/* Skills */}
-      <div style={styles.section}>
-        <h3>⚡ Skills</h3>
-        <div style={styles.grid}>
-          {["AWS", "Docker", "Kubernetes", "Terraform", "CI/CD"].map((s) => (
-            <div key={s} style={styles.card}>
-              {s}
-            </div>
-          ))}
+    <div className="app">
+      <nav className="navbar">
+        <h2>Rizwan<span>.</span></h2>
+        <div>
+          <a href="#projects">Projects</a>
+          <a href="#skills">Skills</a>
+          <a href="#contact">Contact</a>
         </div>
-      </div>
+      </nav>
 
-      {/* GitHub Repos */}
-      <div style={styles.section}>
-        <h3>🟢 GitHub Projects</h3>
-        {repos.map((repo) => (
-          <p key={repo.id}>
-            🔗{" "}
-            <a href={repo.html_url} target="_blank" style={styles.link}>
-              {repo.name}
-            </a>
+      <section className="hero">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <p className="tag">DevOps Engineer in Progress</p>
+          <h1>Hi, I'm Rizwan Shah</h1>
+          <h2>I build, deploy, and automate cloud projects.</h2>
+          <p className="hero-text">
+            Learning DevOps with hands-on projects in GitHub Actions, Docker,
+            AWS, Linux, CI/CD pipelines, and cloud deployment.
           </p>
-        ))}
-      </div>
 
-      {/* DevOps Pipeline */}
-      <div style={styles.section}>
-        <h3>🟡 DevOps Pipeline</h3>
-        <p>Code → Build → Test → Docker → Deploy → Monitor</p>
-      </div>
+          <div className="buttons">
+            <a href="https://github.com/rizwanshah8588-pixel" target="_blank">
+              View GitHub
+            </a>
+            <a href="#projects" className="outline">
+              See Projects
+            </a>
+          </div>
+        </motion.div>
+      </section>
 
-      {/* Resume */}
-      <div style={styles.section}>
-        <a href="/resume.pdf" download style={styles.button}>
-          ⬇ Download Resume
-        </a>
-      </div>
+      <section className="stats">
+        <div>
+          <h3>10+</h3>
+          <p>GitHub Projects</p>
+        </div>
+        <div>
+          <h3>24/7</h3>
+          <p>Learning Mode</p>
+        </div>
+        <div>
+          <h3>CI/CD</h3>
+          <p>Deployment Focus</p>
+        </div>
+      </section>
 
-      {/* Contact */}
-      <div style={styles.section}>
-        <h3>🟣 Contact Me</h3>
-        <form onSubmit={sendEmail}>
-          <input name="name" placeholder="Name" style={styles.input} />
-          <input name="email" placeholder="Email" style={styles.input} />
-          <textarea name="message" placeholder="Message" style={styles.input} />
-          <button type="submit" style={styles.button}>
-            Send
-          </button>
-        </form>
-      </div>
+      <section id="skills" className="section">
+        <h2>Tech Stack</h2>
+        <p className="section-text">Tools I am learning and using in DevOps.</p>
+
+        <div className="skills-grid">
+          <span>Linux</span>
+          <span>Git</span>
+          <span>GitHub</span>
+          <span>Docker</span>
+          <span>AWS EC2</span>
+          <span>GitHub Actions</span>
+          <span>CI/CD</span>
+          <span>React</span>
+          <span>Vercel</span>
+          <span>Terraform</span>
+          <span>Kubernetes</span>
+          <span>Jenkins</span>
+        </div>
+      </section>
+
+      <section id="projects" className="section">
+        <h2>Featured DevOps Projects</h2>
+        <p className="section-text">
+          Real projects showing deployment, automation, and cloud skills.
+        </p>
+
+        <div className="projects-grid">
+          <div className="project-card">
+            <p className="status">🟢 Live Project</p>
+            <h3>Portfolio Deployment on Vercel</h3>
+            <p>
+              Built and deployed a React portfolio website using GitHub and
+              Vercel with automatic deployment after every push.
+            </p>
+            <ul>
+              <li>React frontend</li>
+              <li>GitHub repository</li>
+              <li>Vercel auto deployment</li>
+            </ul>
+          </div>
+
+          <div className="project-card">
+            <p className="status">⚙️ DevOps Project</p>
+            <h3>CI/CD Pipeline with GitHub Actions</h3>
+            <p>
+              Created an automated workflow to build, test, and deploy code
+              whenever changes are pushed to GitHub.
+            </p>
+            <ul>
+              <li>GitHub Actions workflow</li>
+              <li>Build automation</li>
+              <li>Deployment pipeline</li>
+            </ul>
+          </div>
+
+          <div className="project-card">
+            <p className="status">☁️ Cloud Project</p>
+            <h3>Docker Deployment on AWS EC2</h3>
+            <p>
+              Containerized an application using Docker and deployed it on an
+              AWS EC2 Linux server.
+            </p>
+            <ul>
+              <li>Docker container</li>
+              <li>AWS EC2 server</li>
+              <li>Linux commands</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section className="section journey">
+        <h2>My DevOps Journey</h2>
+        <div className="timeline">
+          <div>
+            <h3>Step 1</h3>
+            <p>Started with Git, GitHub, and Linux basics.</p>
+          </div>
+          <div>
+            <h3>Step 2</h3>
+            <p>Built React projects and deployed them online.</p>
+          </div>
+          <div>
+            <h3>Step 3</h3>
+            <p>Learning Docker, AWS, CI/CD, Jenkins, and Kubernetes.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" className="section contact">
+        <h2>Let’s Connect</h2>
+        <p>
+          I am building real DevOps projects and improving every day.
+        </p>
+
+        <div className="buttons center">
+          <a href="https://github.com/rizwanshah8588-pixel" target="_blank">
+            GitHub Profile
+          </a>
+          <a href="mailto:your-email@gmail.com" className="outline">
+            Email Me
+          </a>
+        </div>
+      </section>
     </div>
   );
 }
 
-const styles = {
-  container: {
-    backgroundColor: "#000",
-    color: "#00ffcc",
-    minHeight: "100vh",
-    textAlign: "center",
-    fontFamily: "monospace",
-    padding: "20px",
-    position: "relative",
-  },
-  canvas: {
-    position: "fixed",
-    top: 0,
-    left: 0,
-    zIndex: -1,
-  },
-  name: {
-    fontSize: "40px",
-    textShadow: "0 0 10px #00ffcc",
-  },
-  typing: {
-    fontSize: "18px",
-  },
-  section: {
-    marginTop: "40px",
-  },
-  grid: {
-    display: "flex",
-    justifyContent: "center",
-    flexWrap: "wrap",
-    gap: "10px",
-  },
-  card: {
-    border: "1px solid #00ffcc",
-    padding: "10px",
-    boxShadow: "0 0 10px #00ffcc",
-  },
-  link: {
-    color: "#00ffcc",
-  },
-  button: {
-    marginTop: "10px",
-    padding: "10px 20px",
-    border: "1px solid #00ffcc",
-    background: "transparent",
-    color: "#00ffcc",
-    cursor: "pointer",
-  },
-  input: {
-    display: "block",
-    margin: "10px auto",
-    padding: "10px",
-    width: "250px",
-    background: "#000",
-    border: "1px solid #00ffcc",
-    color: "#00ffcc",
-  },
-};
+export default App;
