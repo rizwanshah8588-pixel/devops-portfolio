@@ -144,7 +144,7 @@ function App() {
       </section>
 
       <section id="contact" className="section contact">
-        <h2>Let’s Connect</h2>
+        <h2 className="logo">Let’s Connect <span>.</span></h2>
         <p>
           I am building real DevOps projects and improving every day.
         </p>
