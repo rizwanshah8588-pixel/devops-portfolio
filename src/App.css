@@ -264,6 +264,18 @@ body {
   margin: 10px;
 }
 
+.logo {
+  color: #ffffff;
+  font-size: 28px;
+  font-weight: 800;
+  text-shadow: 0 0 15px rgba(255,255,255,0.3);
+}
+
+.logo span {
+  color: #38bdf8;
+  text-shadow: 0 0 15px #38bdf8, 0 0 30px #38bdf8;
+}
+
 @media (max-width: 768px) {
   .navbar {
   backdrop-filter: blur(20px);
@@ -288,4 +300,5 @@ body {
 
   background: linear-gradient(90deg, #38bdf8, #7c3aed);
   border-radius: 10px;
+}
 }
