@@ -3,9 +3,10 @@ import "./App.css";
 
 function App() {
   return (
+    
     <div className="app">
       <nav className="navbar">
-        <h2>Rizwan<span>.</span></h2>
+        <h2 className="logo">Rizwan<span>.</span></h2>
         <div>
           <a href="#projects">Projects</a>
           <a href="#skills">Skills</a>
@@ -20,8 +21,8 @@ function App() {
           transition={{ duration: 0.8 }}
         >
           <p className="tag">DevOps Engineer in Progress</p>
-          <h1>Hi, I'm Rizwan Shah</h1>
-          <h2>I build, deploy, and automate cloud projects.</h2>
+          <h1>Hi, I'm Rizwan Shah </h1>
+          <h2><br/>I build, deploy, and automate cloud projects.</h2>
           <p className="hero-text">
             Learning DevOps with hands-on projects in GitHub Actions, Docker,
             AWS, Linux, CI/CD pipelines, and cloud deployment.
