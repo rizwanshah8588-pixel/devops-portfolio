@@ -1,3 +1,28 @@
+# Rizwan Shah - DevOps Portfolio
+
+This is my personal DevOps portfolio built with React and deployed on Vercel.
+
+## Tech Stack
+- React
+- CSS
+- Git & GitHub
+- Vercel
+- GitHub Actions
+- Docker
+- AWS EC2
+
+## Projects
+- Portfolio deployment with Vercel
+- CI/CD pipeline using GitHub Actions
+- Docker deployment on AWS EC2
+
+## Live Website
+https://devops-portfolio-two-gamma.vercel.app
+
+## GitHub
+https://github.com/rizwanshah8588-pixel
+
+---
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
